@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Менеджер</title>
+</head>
+<body>
+    <h1>Страница МЕНЕДЖЕРА</h1>
+    <p>Добро пожаловать, {{ request.session.user_fio }}!</p>
+    <p>Ваша роль: {{ request.session.user_role }}</p>
+    <a href="{% url 'logout' %}">Выйти</a>
+</body>
+</html>
+</html>

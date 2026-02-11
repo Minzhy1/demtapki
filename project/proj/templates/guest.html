@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Гость</title>
+    <link rel="stylesheet" href="{% static 'gueststyle.css' %}">
+</head>
+<header>
+        <div class="header-left">
+            <img src="/static/images/icon.png" alt="Логотип" class="header-logo" >
+            <h1 style="margin: 0; font-size: 24px;">Магазин товаров</h1>
+        </div>
+        <div class="header-right">
+            <span> Страница гостя </span>
+            <a href="{% url 'logout' %}">Выйти</a>
+        </div>
+</header>
+<body>
+    <h1>Каталог товаров</h1>
+    {% for tovar in tovars %}
+    <!-- Фото -->
+    <div style="border:1px solid #ccc; margin:10px; padding:10px; display:flex;
+                {% if tovar.discount > 15 %}
+                    background-color: #2E8B57; color: white;
+                {% endif %}">
+        <div style="margin-right:20px;">
+            {% if tovar.photo %}
+                <img src="/static/images/{{ tovar.photo }}" width="150"
+                     style="{% if tovar.discount > 15 %}border: 2px solid white; border-radius: 5px;{% endif %}">
+            {% else %}
+                <div style="width:150px;height:150px;background:#eee;">
+                    <img src="/static/images/picture.png" width="150" height="150">
+                </div>
+            {% endif %}
+        </div>
+
+        <div style="flex: 1;">
+            <div><b>Категория:</b> {{ tovar.category.title }}</div>
+            <div><b>Название:</b> {{ tovar.title.title }}</div>
+            <!-- Цена -->
+            <span style="text-decoration: line-through; color: red;"> {{ tovar.price }} руб.</span>
+                <span>
+                    {{ tovar.discounted_price|floatformat:2 }} руб.
+                </span>
+            <div>
+            <div style="{% if tovar.amount == 0 %}color: #42AAFF;{% endif %}"><b>На складе:</b> {{ tovar.amount }}</div>
+            </div>
+        </div>
+        <!-- Скидка -->
+        {% if tovar.discount > 0 %}
+        <div style="display: flex; align-items: center; justify-content: center;margin-left: 20px; padding: 0 20px;">
+            <div style="font-size: 24px; font-weight: bold;">
+                - {{ tovar.discount }}%
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+    {% endfor %}
+</body>
+</html>

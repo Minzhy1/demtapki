@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход в систему</title>
+    <link rel="stylesheet" href="{% static 'avtorizstyle.css' %}">
+</head>
+<body>
+    <div>
+        <h2>Вход в систему</h2>
+
+        {% if error %}
+            <div class="error" >{{ error }}</div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Ваш логин" required>
+            <input type="text" name="password" placeholder="Ваш пароль" required>
+            <button type="submit">Войти</button>
+        </form>
+        <a href="{% url 'guest_page' %}">Войти как гость</a>
+    </div>
+
+</body>
+</html>

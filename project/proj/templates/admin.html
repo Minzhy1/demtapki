@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Админ</title>
+</head>
+<body>
+    <h1>Страница АДМИНА</h1>
+    <p>Добро пожаловать, {{ request.session.user_fio }}!</p>
+    <p>Ваша роль: {{ request.session.user_role }}</p>
+    <a href="{% url 'logout' %}">Выйти</a>
+</body>
+</html>
